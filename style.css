@@ -4,7 +4,7 @@ Theme Name: Pierre_theme
     Author: Underscores.me
 Author URI: http://
 Description: Mon super theme wordpress
-Version: 1.0.0
+Version: 1.0.1
 License: GNU General Public License v2 or later
 License URI: LICENSE
 Text Domain: pierre_theme
@@ -896,4 +896,19 @@ object {
 }
 .related-tags {
     border-left: 1px solid grey;
+}
+
+.flex .post-item, .flex .post-item div {
+    width: 100%;
+}
+
+#home-page {
+    display: flex;
+}
+.left-side {
+    width: 70%;
+}
+.right-side {
+    width: 20%;
+    border: 1px solid black;
 }

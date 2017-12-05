@@ -44,7 +44,8 @@ if ( ! function_exists( 'pierre_theme_setup' ) ) :
 
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus( array(
-			'menu-1' => esc_html__( 'Primary', 'pierre_theme' ),
+            'menu-1' => esc_html__( 'Primary', 'pierre_theme' ),
+            'menu-2' => "Footer Menu"
 		) );
 
 		/*
@@ -109,7 +110,16 @@ function pierre_theme_widgets_init() {
 		'after_widget'  => '</section>',
 		'before_title'  => '<h2 class="widget-title">',
 		'after_title'   => '</h2>',
-	) );
+    ) );
+    register_sidebar( array(
+        'name'          => 'Right Sidebar',
+        'id'            => 'right_sidebar',
+        'description'   => 'Sidebar de droite',
+        'before_widget' => '<div class="right-widget">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h4 class="right-widget-title">',
+        'after_title'   => '</h4>'
+    ) );
 }
 add_action( 'widgets_init', 'pierre_theme_widgets_init' );
 
@@ -157,11 +167,4 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 }
 
 /*** Pierre theme functions ***/
-
-/** Dev **/
-function dd( $target ){
-    echo "<pre>";
-    var_dump( $target );
-    echo "</pre>";
-    die();
-}
+include 'theme_settings.php';

@@ -8,7 +8,7 @@ get_header();
 
     <div class='cat-articles'> 
 
-        <?= single_cat_title("<h1 class='cat-title'>", "</h1>") ?>
+        <h1 class='cat-title'> <?php single_cat_title(); ?> </h1>
 
         <?php 
             if( have_posts() ){
