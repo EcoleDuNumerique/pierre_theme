@@ -912,3 +912,17 @@ object {
     width: 20%;
     border: 1px solid black;
 }
+
+/*** Template left sidebar ***/
+#template-container {
+    display: flex;
+    justify-content: space-around;
+    border: 1px solid black;
+    padding: 50px 0px;
+}
+#template-container .left-content {
+    width: 20%;
+}
+#template-container .content {
+    width: 70%;
+}

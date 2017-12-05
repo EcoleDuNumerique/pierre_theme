@@ -9,6 +9,12 @@ function dd( $target ){
 
 /** Themes  **/
 
+//Ajout de scripts js
+add_action("admin_enqueue_scripts", "load_js");
+function load_js(){
+    wp_enqueue_script( "colorjs", get_template_directory_uri()."/js/jscolor.min.js" );
+}
+
 // On va déclencher une action au moment ou le menu admin se charge
 add_action("admin_menu", "generate_theme_menu");
 add_action("admin_init", "add_option_home_category");
@@ -70,6 +76,8 @@ function generate_theme_menu_page(){
         <input type="submit" value="Valider">
 
     </form>
+
+    <input type="text" class="jscolor" value="fff" >
 
     <?php 
 }
