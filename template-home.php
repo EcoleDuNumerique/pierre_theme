@@ -4,6 +4,7 @@
 */
 
 get_header();
+get_custom_styles();
 ?>
 
     <div id="home-page">

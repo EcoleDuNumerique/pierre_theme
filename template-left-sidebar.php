@@ -4,7 +4,9 @@
 */
 
 get_header();
+get_custom_styles();
 ?> 
+
     <div id="template-container"> 
 
         <div class="left-content">

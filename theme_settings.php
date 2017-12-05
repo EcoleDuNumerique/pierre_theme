@@ -9,20 +9,23 @@ function dd( $target ){
 
 /** Themes  **/
 
-//Ajout de scripts js
-add_action("admin_enqueue_scripts", "load_js");
-function load_js(){
-    wp_enqueue_script( "colorjs", get_template_directory_uri()."/js/jscolor.min.js" );
-}
-
 // On va déclencher une action au moment ou le menu admin se charge
 add_action("admin_menu", "generate_theme_menu");
-add_action("admin_init", "add_option_home_category");
+add_action("admin_init", "add_option_customs");
 
-function add_option_home_category(){
+// Ajoute des scripts coté admin
+add_action("admin_enqueue_scripts", "load_scripts");
+function load_scripts(){
+    wp_enqueue_script( "jscolor", get_template_directory_uri()."/js/jscolor.min.js" );
+}
+
+function add_option_customs(){
 
     // On créer une option dans la bdd pour le choix de la categorie
     add_option("home_category", "");
+
+    //On ajoute les options de couleur
+    add_option("custom_colors", []);
 
 }
 function generate_theme_menu(){
@@ -43,7 +46,35 @@ function generate_theme_menu_page(){
         update_option( "home_category", $_POST["home_category"] );
     }
 
+    if( isset( $_POST["color_h"] ) 
+        && isset( $_POST["color_c"] ) 
+        && isset( $_POST["color_f"] ) 
+    ){
+
+        $colors = [
+            "headers"   => $_POST["color_h"],
+            "body"      => $_POST["color_c"],
+            "background"=> $_POST["color_f"]
+        ];
+
+        update_option("custom_colors", $colors );
+
+    }
+
+    //
     $option_val = get_option("home_category");
+
+    //
+    $colors_val = [
+        "headers"   => [],
+        "body"      => "",
+        "background"=> ""
+    ];
+    if( get_option("custom_colors") ) {
+        $colors_val = get_option("custom_colors");
+    }
+
+    //
     $categories = get_categories();
 
     ?> 
@@ -71,13 +102,33 @@ function generate_theme_menu_page(){
 
             </select>
 
-        </label>
+        </label><br>
 
+        <!-- Gestion couleur des titres -->
+
+        <?php for( $i=0; $i < 6; $i++ ){ ?>
+
+            <label> 
+                <span> Couleur h<?= $i+1 ?> </span> 
+                <input class="jscolor" type="text" name="color_h[]" value="<?= $colors_val["headers"][$i] ?>" />
+            </label><br>
+
+        <?php } ?>
+
+        <label> 
+            <span> Couleur corps </span> 
+            <input class="jscolor" type="text" name="color_c" value="<?= $colors_val["body"] ?>" />
+        </label><br>
+
+        <label> 
+            <span> Couleur fond<?= $i+1 ?> </span> 
+            <input class="jscolor" type="text" name="color_f" value="<?= $colors_val["background"] ?>" />
+        </label><br>
+
+        <!-- Soumission formulaire -->
         <input type="submit" value="Valider">
 
     </form>
-
-    <input type="text" class="jscolor" value="fff" >
 
     <?php 
 }

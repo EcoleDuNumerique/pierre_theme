@@ -3,6 +3,7 @@
     Template Name: Left Menu
 */
 get_header();
+get_custom_styles();
 ?>
 
     <div id="template-container">

@@ -178,3 +178,20 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 
 /*** Pierre theme functions ***/
 include 'theme_settings.php';
+
+function get_custom_styles(){
+
+    $custom_colors = get_option( "custom_colors" );
+
+    echo "<style>";
+
+        for( $i=0; $i<6; $i++ ) { 
+            echo "h".($i+1)." { color: #". $custom_colors["headers"][$i] . " }";
+        }
+        
+        echo "p { color: #" . $custom_colors["body"] . " }";
+
+        echo "#content { background-color: #" . $custom_colors["background"] . " }"; 
+
+    echo "</style>";
+}
